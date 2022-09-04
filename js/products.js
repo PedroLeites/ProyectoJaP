@@ -1,10 +1,17 @@
+let catID = localStorage.getItem("catID");
+//console.log(catID);
+/*"https://japceibal.github.io/emercado-api/cats_products/101.json"*/
 const productosJSON =
-  "https://japceibal.github.io/emercado-api/cats_products/101.json";
+  "https://japceibal.github.io/emercado-api/cats_products/" + catID + ".json";
 
 fetch(productosJSON)
   .then((respuesta) => respuesta.json())
 
   .then((datos) => {
+    let nombreCat = datos.catName;
+    //console.log(nombreCat);
+    document.getElementById("catNom").innerHTML = nombreCat;
+
     datos.products.forEach((producto) => {
       let row = "";
       row =
