@@ -16,6 +16,8 @@ function login() {
   if (bool) {
     window.location.href = "inicio.html";
   }
+
+  localStorage.setItem("usuario", mail);
 }
 /*
 let mail = document.getElementById("email").value;

@@ -40,3 +40,6 @@ fetch(productosJSON)
     });
   })
   .catch((error) => alert("Hubo un error" + error));
+
+document.getElementById("nombreUsuario").innerHTML =
+  localStorage.getItem("usuario");
