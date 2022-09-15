@@ -41,17 +41,22 @@
     <div class="text-center p-4">
       <h2>Productos</h2>
       <p class="lead">Verás aquí todos los productos de la categoría <span id="catNom"></span></p>
+      <div>
+        <input placeholder="Buscar productos" type="text" name="" id="searchBar">
+        <i class="fa fa-search"></i>
+      </div>
     </div>
+
     <div class="container">
       <div class="row">
         <div class="col text-end">
           <div class="btn-group btn-group-toggle mb-4" data-bs-toggle="buttons">
-            <input type="radio" class="btn-check" name="options" id="precioDesc">
-            <label class="btn btn-light" for="precioDesc"><i class="fas fa-sort-amount-down mr-1"></i>$</label>
-            <input type="radio" class="btn-check" name="options" id="precioAsc">
-            <label class="btn btn-light" for="precioAsc"><i class="fas fa-sort-amount-up mr-1"></i>$</label>
-            <input type="radio" class="btn-check" name="options" id="relDesc" checked>
-            <label class="btn btn-light" for="relDesc"><i class="fas fa-sort-amount-down mr-1"></i>Rel.</label>
+            <input type="radio" class="btn-check" name="options" id="sortDesc">
+            <label class="btn btn-light" for="sortDesc"><i class="fas fa-sort-amount-down mr-1"></i>$</label>
+            <input type="radio" class="btn-check" name="options" id="sortAsc">
+            <label class="btn btn-light" for="sortAsc"><i class="fas fa-sort-amount-up mr-1"></i>$</label>
+            <input type="radio" class="btn-check" name="options" id="sortByCount" checked>
+            <label class="btn btn-light" for="sortByCount"><i class="fas fa-sort-amount-down mr-1"></i>Rel.</label>
           </div>
         </div>
       </div>
