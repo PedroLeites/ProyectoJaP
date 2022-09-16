@@ -6,35 +6,6 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
-function sortProducts(criteria, array){
-  let result = [];
-    if (criteria === ORDER_ASC_BY_COST)
-    {
-        result = array.sort(function(a, b) {
-            if ( a.cost < b.cost ){ return -1; }
-            if ( a.cost > b.cost ){ return 1; }
-            return 0;
-        });
-    }else if (criteria === ORDER_DESC_BY_COST){
-        result = array.sort(function(a, b) {
-            if ( a.cost > b.cost ){ return -1; }
-            if ( a.cost < b.cost ){ return 1; }
-            return 0;
-        });
-    }else if (criteria === ORDER_BY_PROD_COST){
-        result = array.sort(function(a, b) {
-            let aCount = parseInt(a.soldCount);
-            let bCount = parseInt(b.soldCount);
-
-            if ( aCount > bCount ){ return -1; }
-            if ( aCount < bCount ){ return 1; }
-            return 0;
-        });
-    }
-
-    return result;
-}
-
 function showProductslist(){
   let htmlContentToAppend = "";
   for (let product of currentProductsArray){
@@ -43,7 +14,7 @@ function showProductslist(){
           ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
 
       htmlContentToAppend += `
-      <div class="list-group-item list-group-item-action cursor-active">
+      <div onclick="setProductID(${product.id})" class="list-group-item list-group-item-action cursor-active">
           <div class="row">
               <div class="col-3">
                   <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
@@ -65,6 +36,35 @@ function showProductslist(){
 
 }
 
+function sortProducts(criteria, array){
+  let listaFiltrada = [];
+    if (criteria === ORDER_ASC_BY_COST)
+    {
+      listaFiltrada = array.sort(function(a, b) {
+            if ( a.cost < b.cost ){ return -1; }
+            if ( a.cost > b.cost ){ return 1; }
+            return 0;
+        });
+    }else if (criteria === ORDER_DESC_BY_COST){
+      listaFiltrada = array.sort(function(a, b) {
+            if ( a.cost > b.cost ){ return -1; }
+            if ( a.cost < b.cost ){ return 1; }
+            return 0;
+        });
+    }else if (criteria === ORDER_BY_PROD_COST){
+      listaFiltrada = array.sort(function(a, b) {
+            let aCount = parseInt(a.soldCount);
+            let bCount = parseInt(b.soldCount);
+
+            if ( aCount > bCount ){ return -1; }
+            if ( aCount < bCount ){ return 1; }
+            return 0;
+        });
+    }
+
+    return listaFiltrada;
+}
+
 function sortAndShowProductslist(sortCriteria, productosListArray){
   currentSortCriteria = sortCriteria;
 
@@ -79,9 +79,9 @@ function sortAndShowProductslist(sortCriteria, productosListArray){
 }
 
 document.addEventListener("DOMContentLoaded", function(e){
-  getJSONData(PRODUCTS_URL).then(function(result){
-    if (result.status === "ok"){
-        sortAndShowProductslist(ORDER_ASC_BY_COST, result.data.products);
+  getJSONData(PRODUCTS_URL).then(function(resultObj){
+    if (resultObj.status === "ok"){
+        sortAndShowProductslist(ORDER_ASC_BY_COST, resultObj.data.products);
     } 
   });
 
@@ -146,3 +146,8 @@ document.getElementById("searchBar").addEventListener("keyup", function () {
   
   currentProductsArray = arrayOriginal;
 })
+
+function setProductID(id){
+  localStorage.setItem("productID", id);
+  window.location.href = "product-info.html"
+}
