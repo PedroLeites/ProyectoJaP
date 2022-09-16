@@ -50,8 +50,18 @@
           <h3 class="mb-3 mt-4">Comentarios</h3>
           <div id="Comments"></div>
           <div id="StarsScore"></div>
-
+          <div id="newComment"></div>
         </ul>
+        <div class="col-sm-6">
+          <h3 class="mt-4">Comentar</h3>
+          <label for="comment" class="form-label mt-2">Tu opinión</label>
+          <textarea class="form-control" rows="3" id="comment"></textarea>
+          <div class="col-sm-3">
+            <label for="score" class="form-label mb-2 mt-3">Tu puntuación</label>
+            <input type="number" class="form-control pd-4" id="score" min="1" max="5">
+          </div>
+          <button type="button" class="btn btn-primary mt-3" id="sendComment">Enviar</button>
+        </div>
       </div>
     </div>
   </main>

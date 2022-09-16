@@ -38,9 +38,9 @@ function showProductComments(){
   for (let comment of commentsList){
     commentsHTML += `
     <li class="list-group-item">
-            <p class="mb-1"><span class="fw-bold">${comment.user}</span> &nbsp&nbsp ${comment.dateTime} &nbsp&nbsp ${showStars(comment.score)}</p>
-            <p class="mb-1">${comment.description}</p>
-        </li>
+      <p class="mb-1"><span class="fw-bold">${comment.user}</span> &nbsp&nbsp ${comment.dateTime} &nbsp&nbsp ${showStars(comment.score)}</p>
+      <p class="mb-1">${comment.description}</p>
+    </li>
     `
   }
   document.getElementById("Comments").innerHTML = commentsHTML;
@@ -61,6 +61,23 @@ function showStars(score){
   }
   return scoreHTML;
 }
+
+document.getElementById("sendComment").addEventListener("click", function(){
+  let comentario = document.getElementById("comment").value;
+  let puntos = document.getElementById("score").value;
+
+  let date = new Date();
+  let fechaCompleta = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+  let nuevoComentario = `
+  <li class="list-group-item">
+    <p class="mb-1"><span class="fw-bold">${localStorage.getItem("usuario")}</span> &nbsp&nbsp ${fechaCompleta} &nbsp&nbsp ${showStars(puntos)}</p>
+    <p class="mb-1">${comentario}</p>
+  </li>
+  `
+
+  document.getElementById("newComment").innerHTML = nuevoComentario;
+});
 
 document.addEventListener("DOMContentLoaded", function(e){
   let productID = localStorage.getItem("productID");
