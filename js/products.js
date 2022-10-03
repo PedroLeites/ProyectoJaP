@@ -130,8 +130,6 @@ document.getElementById("rangeFilterCount").addEventListener("click", function()
   showProductslist();
 });
 
-document.getElementById("nombreUsuario").innerHTML = localStorage.getItem("usuario");
-
 let arrayOriginal = currentProductsArray;
 document.getElementById("searchBar").addEventListener("keyup", function () {
   filterSerch = document.getElementById("searchBar").value;
@@ -147,7 +145,8 @@ document.getElementById("searchBar").addEventListener("keyup", function () {
   currentProductsArray = arrayOriginal;
 })
 
+/*
 function setProductID(id){
   localStorage.setItem("productID", id);
   window.location.href = "product-info.html"
-}
+}*/

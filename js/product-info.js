@@ -1,4 +1,4 @@
-document.getElementById("nombreUsuario").innerHTML = localStorage.getItem("usuario");
+//document.getElementById("nombreUsuario").innerHTML = localStorage.getItem("usuario");
 
 infoProduct = [];
 commentsList = [];
@@ -85,10 +85,18 @@ document.addEventListener("DOMContentLoaded", function(e){
     if (resultObj.status == "ok"){
       infoProduct = resultObj.data;
       showProductInfo();
+      mostrarProductosRel();
+    }
+  });
+
+  getJSONData(PRODUCT_INFO_COMMENTS_URL + productID + EXT_TYPE).then(function(resultObj){
+    if (resultObj.status == "ok"){
+      commentsList = resultObj.data;
+      showProductComments();
     }
   });
 });
-
+/*
 document.addEventListener("DOMContentLoaded", function(e){
   let productID = localStorage.getItem("productID");
   getJSONData(PRODUCT_INFO_COMMENTS_URL + productID + EXT_TYPE).then(function(resultObj){
@@ -97,4 +105,19 @@ document.addEventListener("DOMContentLoaded", function(e){
       showProductComments();
     }
   });
-});
+});*/
+
+function mostrarProductosRel(){
+  let htmlContentToAppend = "";
+  for (let producto of infoProduct.relatedProducts){
+    htmlContentToAppend += `
+      <div onclick="setProductID(${producto.id})" class="card col-sm-1 cursor-active" style="width: 18rem;">
+        <img src="${producto.image}" class="card-img-top" alt="img">
+        <div class="card-body">
+          <p class="card-text">${producto.name}</p>
+        </div>
+      </div>
+    `;
+  }
+  document.getElementById("ProductosRela").innerHTML = htmlContentToAppend;
+}

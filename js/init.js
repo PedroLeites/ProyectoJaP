@@ -39,3 +39,18 @@ let getJSONData = function(url){
         return result;
     });
 }
+
+function setProductID(id){
+  localStorage.setItem("productID", id);
+  window.location.href = "product-info.html"
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  let usuario = localStorage.getItem("usuario");
+  document.getElementById("nombreUsuario").innerHTML = usuario;
+});
+
+document.getElementById("logout").addEventListener("click", function(){
+  //window.location.href = "index.html";
+  localStorage.removeItem("usuario");
+});
